@@ -36,7 +36,7 @@ export const shades = {
   }
 };
 
-export const themes = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: shades.primary[500]
@@ -45,7 +45,7 @@ export const themes = createTheme({
       main: shades.secondary[500]
     },
     neutral: {
-      dark: shades.netural[700],
+      dark: shades.neutral[700],
       main: shades.neutral[500],
       light: shades.neutral[100]
     }
@@ -68,6 +68,6 @@ export const themes = createTheme({
     h4: {
       fontFamily: ["Cinzel", "sans-serif"].join(","),
       fontSize: 14, 
-    }
-  };
+    },
+  },
 });
