@@ -80,7 +80,7 @@ const item = ({item, width})=> {
               Add to Cart
             </Button>
           </Box> 
-        </Box>
+        </Box> 
       </Box>
 
       <Box mt="3px">
