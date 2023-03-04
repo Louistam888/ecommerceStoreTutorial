@@ -3,92 +3,14 @@ import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
-import Shipping from "./Shipping";
-import Payment from "./Payment";
 import { shades } from "../../theme";
+import Payment from "./Payment";
+import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51MgFTDE9bJZH5kiQuzUbJHPJ7fmQwSejIxWYh5maW6j8ACwbcLz8dSRvMBP3xYtB8EUIA5qVZDcY9ImbNU4X8qEg00DeApogPl"
+  "pk_test_51LgU7yConHioZHhlAcZdfDAnV9643a7N1CMpxlKtzI1AUWLsRyrord79GYzZQ6m8RzVnVQaHsgbvN1qSpiDegoPi006QkO0Mlc"
 );
-
-
-const initialValues = {
-  billingAddress: {
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
-  email: "",
-  phoneNumber: "",
-};
-
-const checkoutSchema = [
-  yup.object().shape({
-    billingAddress: yup.object().shape({
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
-      street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
-    }),
-    shippingAddress: yup.object().shape({
-      isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      lastName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      country: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street1: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      state: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      zipCode: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-    }),
-  }),
-  yup.object().shape({
-    email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
-  }),
-];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -200,8 +122,6 @@ const Checkout = () => {
                     Back
                   </Button>
                 )}
-
-                {/* SUBMIT IS NOT WORKING */}
                 <Button
                   fullWidth
                   type="submit"
@@ -226,4 +146,81 @@ const Checkout = () => {
   );
 };
 
-export default Checkout; 
+const initialValues = {
+  billingAddress: {
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  },
+  shippingAddress: {
+    isSameAddress: true,
+    firstName: "",
+    lastName: "",
+    country: "",
+    street1: "",
+    street2: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  },
+  email: "",
+  phoneNumber: "",
+};
+
+const checkoutSchema = [
+  yup.object().shape({
+    billingAddress: yup.object().shape({
+      firstName: yup.string().required("required"),
+      lastName: yup.string().required("required"),
+      country: yup.string().required("required"),
+      street1: yup.string().required("required"),
+      street2: yup.string(),
+      city: yup.string().required("required"),
+      state: yup.string().required("required"),
+      zipCode: yup.string().required("required"),
+    }),
+    shippingAddress: yup.object().shape({
+      isSameAddress: yup.boolean(),
+      firstName: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      lastName: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      country: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      street1: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      street2: yup.string(),
+      city: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      state: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+      zipCode: yup.string().when("isSameAddress", {
+        is: false,
+        then: yup.string().required("required"),
+      }),
+    }),
+  }),
+  yup.object().shape({
+    email: yup.string().required("required"),
+    phoneNumber: yup.string().required("required"),
+  }),
+];
+
+export default Checkout;

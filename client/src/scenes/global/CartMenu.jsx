@@ -16,21 +16,23 @@ import { useNavigate } from "react-router-dom";
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: space-between;
-  align-items:center; 
+  align-items: center;
 `;
 
 const CartMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state)=> state.cart.cart);
-  const isCartOpen = useSelector((state)=> state.cart.isCartOpen);
+  const cart = useSelector((state) => state.cart.cart);
+  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+
   const totalPrice = cart.reduce((total, item) => {
     return total + item.count * item.attributes.price;
   }, 0);
+
   return (
-    <Box //OVERLAY
+    <Box
       display={isCartOpen ? "block" : "none"}
-      backgroundColor="rgba(0,0,0, 0.4)"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
       position="fixed"
       zIndex={10}
       width="100%"
@@ -39,7 +41,6 @@ const CartMenu = () => {
       top="0"
       overflow="auto"
     >
-      {/* MODAL */}
       <Box
         position="fixed"
         right="0"
@@ -52,19 +53,18 @@ const CartMenu = () => {
           {/* HEADER */}
           <FlexBox mb="15px">
             <Typography variant="h3">SHOPPING BAG ({cart.length})</Typography>
-            <IconButton onClick ={()=> dispatch(setIsCartOpen({}))}>
+            <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
           </FlexBox>
 
           {/* CART LIST */}
-
           <Box>
-            {cart.map((item)=> (
+            {cart.map((item) => (
               <Box key={`${item.attributes.name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
-                    <img 
+                    <img
                       alt={item?.name}
                       width="123px"
                       height="164px"
@@ -72,43 +72,44 @@ const CartMenu = () => {
                     />
                   </Box>
                   <Box flex="1 1 60%">
-
-                    {/* ITEM NAME */}
                     <FlexBox mb="5px">
-                      <Typography fontWeight ="bold">
+                      <Typography fontWeight="bold">
                         {item.attributes.name}
                       </Typography>
-                      <IconButton onClick={()=>dispatch(removeFromCart({ id: item.id }))}>
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromCart({ id: item.id }))
+                        }
+                      >
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
-                    <Typography > {item.attributes.shortDescription}</Typography>
-
-                    {/* AMOUNT */}          
+                    <Typography>{item.attributes.shortDescription}</Typography>
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
                         alignItems="center"
                         border={`1.5px solid ${shades.neutral[500]}`}
-                        >  
+                      >
                         <IconButton
-                          onClick={()=>dispatch(decreaseCount({ id: item.id }))}
-                          >
+                          onClick={() =>
+                            dispatch(decreaseCount({ id: item.id }))
+                          }
+                        >
                           <RemoveIcon />
                         </IconButton>
                         <Typography>{item.count}</Typography>
                         <IconButton
-                          onClick={()=>dispatch(increaseCount({ id: item.id }))}
-                          >
+                          onClick={() =>
+                            dispatch(increaseCount({ id: item.id }))
+                          }
+                        >
                           <AddIcon />
                         </IconButton>
                       </Box>
-
-                    {/* PRICE */}
-                    <Typography fontWeight="bold">
-                      ${item.attributes.price}
-                    </Typography>
-
+                      <Typography fontWeight="bold">
+                        ${item.attributes.price}
+                      </Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -130,18 +131,20 @@ const CartMenu = () => {
                 borderRadius: 0,
                 minWidth: "100%",
                 padding: "20px 40px",
-                m: "20px 0"
+                m: "20px 0",
               }}
-              onClick={()=> {
-                navigate("./checkout");
+              onClick={() => {
+                navigate("/checkout");
                 dispatch(setIsCartOpen({}));
               }}
-              >CHECKOUT</Button>
+            >
+              CHECKOUT
+            </Button>
           </Box>
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default CartMenu;

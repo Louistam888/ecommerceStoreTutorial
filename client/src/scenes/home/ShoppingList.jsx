@@ -13,6 +13,7 @@ const ShoppingList = () => {
   const [value, setValue] = useState("all");
   const items = useSelector((state) => state.cart.items);
   const breakPoint = useMediaQuery("(min-width:600px)");
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -72,7 +73,8 @@ const ShoppingList = () => {
         rowGap="20px"
         columnGap="1.33%"
       >
-        {value === "all" && items.map((item) => (
+        {value === "all" &&
+          items.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         {value === "newArrivals" &&
@@ -93,4 +95,3 @@ const ShoppingList = () => {
 };
 
 export default ShoppingList;
-

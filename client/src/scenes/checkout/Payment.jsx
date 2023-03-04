@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-const Payment = (values, touched, errors, handleBlur, handleChange) => {
+const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
   return (
     <Box m="30px 0">
       {/* CONTACT INFO */}
       <Box>
-        <Typography sx={{mb:"15px"}} fontSize="18px">
-          Contact Info 
+        <Typography sx={{ mb: "15px" }} fontSize="18px">
+          Contact Info
         </Typography>
         <TextField
           fullWidth
@@ -31,8 +31,8 @@ const Payment = (values, touched, errors, handleBlur, handleChange) => {
           name="phoneNumber"
           error={!!touched.phoneNumber && !!errors.phoneNumber}
           helperText={touched.phoneNumber && errors.phoneNumber}
-          sx={{ gridColumn: "span 4"}}
-      />
+          sx={{ gridColumn: "span 4" }}
+        />
       </Box>
     </Box>
   );
